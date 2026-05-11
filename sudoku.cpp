@@ -8,8 +8,11 @@
 */
 
 #include <iostream>
+#include <array>
 
 const int SIZE = 9;
+
+using Board = std::array<std::array<int, SIZE>, SIZE>;
 
 enum class SolveResult
 {
@@ -17,30 +20,39 @@ enum class SolveResult
     UNSOLVABLE
 };
 
-void readInput(int board[][SIZE])
+void readInput(Board& board)
 {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             std::cin >> board[i][j];
 }
 
-SolveResult solve(int board[][SIZE])
+
+bool solveImpl(Board& board)
 {
-
-
-    return SolveResult::UNSOLVABLE;
+    // ...
 }
 
-void printBoard(int board[][SIZE])
+
+SolveResult solve(Board& board) // Wrapper function
+{
+    return solveImpl(board) ? SolveResult::SOLVABLE : SolveResult::UNSOLVABLE;
+}
+
+void printBoard(const Board& board)
 {
     for (int i = 0; i < SIZE; i++)
+    {
         for (int j = 0; j < SIZE; j++)
-            std::cout << board[i][j] << " \n"[j == SIZE - 1];
+            std::cout << board[i][j] << ' ';
+
+        std::cout << std::end;
+    }
 }
 
 int main()
 {
-    int board[SIZE][SIZE];
+    Board board;
 
     readInput(board);
 
